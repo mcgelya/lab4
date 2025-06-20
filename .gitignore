@@ -1,0 +1,6 @@
+out/
+build/
+build-release/
+.vscode/
+.clang-format
+.DS_store
