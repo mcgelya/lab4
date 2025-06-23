@@ -84,7 +84,7 @@ int main() {
             trs[ind].Insert(x);
         } else if (c == "2") {
             std::cout << "Enter index of tree: ";
-            bool err = 1;
+            bool err = 0;
             int ind = getInteger(err, 1, trs.size());
             --ind;
             if (err) {
@@ -102,7 +102,7 @@ int main() {
             trs[ind].Erase(x);
         } else if (c == "3") {
             std::cout << "Enter index of tree: ";
-            bool err = 1;
+            bool err = 0;
             int ind = getInteger(err, 1, trs.size());
             --ind;
             if (err) {
@@ -129,7 +129,7 @@ int main() {
                 }
                 std::string a, b;
                 ss >> a >> b;
-                bool err = 1;
+                bool err = 0;
                 int val = parseInteger(a, err);
                 if (err) {
                     break;
@@ -148,7 +148,7 @@ int main() {
             }
         } else if (c == "5") {
             std::cout << "Enter index of tree: ";
-            bool err = 1;
+            bool err = 0;
             int ind = getInteger(err, 1, trs.size());
             --ind;
             if (err) {
@@ -167,7 +167,7 @@ int main() {
             }
         } else if (c == "6") {
             std::cout << "Enter index of tree that you want to find: ";
-            bool err = 1;
+            bool err = 0;
             int ind1 = getInteger(err, 1, trs.size());
             --ind1;
             if (err) {
@@ -186,7 +186,7 @@ int main() {
             }
         } else if (c == "7") {
             std::cout << "Enter index of tree: ";
-            bool err = 1;
+            bool err = 0;
             int ind = getInteger(err, 1, trs.size());
             --ind;
             if (err) {
@@ -199,7 +199,7 @@ int main() {
             std::cout << "\nHere it is: " << mp.ToString() << "\n";
         } else if (c == "8") {
             std::cout << "Enter index of tree: ";
-            bool err = 1;
+            bool err = 0;
             int ind = getInteger(err, 1, trs.size());
             --ind;
             if (err) {
@@ -212,7 +212,7 @@ int main() {
             std::cout << "\nHere it is: " << whr.ToString() << "\n";
         } else if (c == "9") {
             std::cout << "Enter index of tree: ";
-            bool err = 1;
+            bool err = 0;
             int ind = getInteger(err, 1, trs.size());
             --ind;
             if (err) {
