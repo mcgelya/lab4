@@ -7,16 +7,24 @@ import sys
 BINARY_PATH = sys.argv[1]
 
 PARAMS = [
+    100,
+    200,
+    500,
     10000,
+    20000,
+    30000,
+    40000,
     80000,
     100000,
-    200000,
-    600000,
-    800000,
-    1000000,
-    3000000,
-    7000000,
-    10000000,
+    # 120000,
+    # 150000,
+    # 200000,
+    # 600000,
+    # 800000,
+    # 1000000,
+    # 3000000,
+    # 7000000,
+    # 10000000,
 ]
 
 REPEATS = 1
@@ -25,6 +33,7 @@ REPEATS = 1
 def run_and_time(param):
     times = []
     for _ in range(REPEATS):
+        print(param)
         start = time.time()
         subprocess.run([BINARY_PATH, str(param)], stdout=subprocess.DEVNULL)
         end = time.time()
@@ -42,10 +51,10 @@ def benchmark(params):
 
 def plot_results(params, times):
     plt.plot(params, times, marker="o")
-    plt.xlabel("Количество вставок")
+    plt.xlabel("Размер дерева")
     plt.xscale("log")
     plt.ylabel("Время выполнения (сек)")
-    plt.title("Бенчмарк")
+    plt.title(f"{sys.argv[2]}")
     plt.grid(True)
     plt.tight_layout()
     plt.show()

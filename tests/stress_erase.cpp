@@ -1,0 +1,26 @@
+#include <chrono>
+#include <iostream>
+#include <random>
+#include <string>
+
+#include "../src/binary_tree.h"
+
+std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+
+int main(int argc, char* argv[]) {
+    int n = 10000;
+    if (argc > 1) {
+        n = std::stoi(argv[1]);
+    }
+    BinaryTree<int> tr;
+    for (int i = 0; i < n; ++i) {
+        tr.Insert(rng() % n);
+    }
+    for (int i = 0; i < n; ++i) {
+        int j = rng() % n;
+        if (tr.Search(j)) {
+            tr.Erase(j);
+        }
+    }
+    std::cout << tr.ToString() << std::endl;
+}

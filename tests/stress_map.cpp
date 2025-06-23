@@ -1,4 +1,5 @@
 #include <chrono>
+#include <iostream>
 #include <random>
 #include <string>
 
@@ -15,4 +16,8 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < n; ++i) {
         tr.Insert(rng() % n);
     }
+    BinaryTree<int> mp = tr.Map([](int x) {
+        return x - 1;
+    });
+    std::cout << mp.ToString() << std::endl;
 }
