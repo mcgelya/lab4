@@ -23,7 +23,7 @@ int parseInteger(std::string& s, bool& err, int l = INT_MIN, int r = INT_MAX) {
             return -1;
         }
         x = x * 10 + (s[i] - '0');
-        if (x < l || x > r) {
+        if (x > r) {
             std::cout << "\nNumber is out of range!\n";
             err = 1;
             return -1;
