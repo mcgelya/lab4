@@ -319,12 +319,8 @@ private:
         }
         for (char c : order) {
             if (c == 'N') {
-                if (v->l == nullptr) {
-                    v->leftThread = prev;
-                }
-                if (prev && prev->r == nullptr) {
-                    prev->rightThread = v;
-                }
+                v->leftThread = prev;
+                prev->rightThread = v;
                 prev = v;
             } else if (c == 'L') {
                 Traverse(v->l, order, prev);
