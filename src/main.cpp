@@ -117,7 +117,7 @@ int main() {
                 continue;
             }
         } else if (c == "4") {
-            std::cout << "Enter vector in format + val-par, when you are done type '!'\n";
+            std::cout << "Enter vector in format + val par, when you are done type '!'\n";
             std::string s;
             std::vector<std::pair<int, int>> cur;
             while (std::getline(std::cin, s)) {
