@@ -108,10 +108,11 @@ int main() {
             if (err) {
                 continue;
             }
+            std::cout << "Enter format: ";
             std::string format;
             std::getline(std::cin, format);
             try {
-                std::cout << ind + 1 << ". " << trs[ind].ToString(format) << std::endl;
+                std::cout << "\n" << ind + 1 << ". " << trs[ind].ToString(format) << std::endl;
             } catch (std::invalid_argument& e) {
                 std::cout << "\nInvalid format!\n";
                 continue;
@@ -192,9 +193,7 @@ int main() {
             if (err) {
                 continue;
             }
-            BinaryTree<int> mp = trs[ind].Map([](int x) {
-                return 2 * x;
-            });
+            BinaryTree<int> mp = trs[ind].Map([](int x) { return 2 * x; });
             trs.push_back(mp);
             std::cout << "\nHere it is: " << mp.ToString() << "\n";
         } else if (c == "8") {
@@ -205,9 +204,7 @@ int main() {
             if (err) {
                 continue;
             }
-            BinaryTree<int> whr = trs[ind].Where([](int x) {
-                return x % 2 == 1;
-            });
+            BinaryTree<int> whr = trs[ind].Where([](int x) { return x % 2 == 1; });
             trs.push_back(whr);
             std::cout << "\nHere it is: " << whr.ToString() << "\n";
         } else if (c == "9") {
@@ -218,11 +215,7 @@ int main() {
             if (err) {
                 continue;
             }
-            int res = trs[ind].Reduce(
-                [](int x, int acc) {
-                    return x + acc;
-                },
-                0);
+            int res = trs[ind].Reduce([](int x, int acc) { return x + acc; }, 0);
             std::cout << "\nHere it is: " << res << "\n";
         } else if (c == "10") {
             break;
