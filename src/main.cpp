@@ -278,12 +278,16 @@ int main() {
                     if (err) {
                         continue;
                     }
+                    std::string firstName, middleName, lastName, birthday;
                     std::cout << "Enter firstName: ";
-                    std::string firstName, lastName;
                     std::getline(std::cin, firstName);
+                    std::cout << "Enter middleName: ";
+                    std::getline(std::cin, middleName);
                     std::cout << "Enter lastName: ";
                     std::getline(std::cin, lastName);
-                    trs[ind].Insert(Person(firstName, lastName, id));
+                    std::cout << "Enter birthday: ";
+                    std::getline(std::cin, birthday);
+                    trs[ind].Insert(Person(firstName, middleName, lastName, birthday, id));
                 } else if (c == "2") {
                     std::cout << "Enter index of tree: ";
                     bool err = 0;
@@ -297,12 +301,16 @@ int main() {
                     if (err) {
                         continue;
                     }
+                    std::string firstName, middleName, lastName, birthday;
                     std::cout << "Enter firstName: ";
-                    std::string firstName, lastName;
                     std::getline(std::cin, firstName);
+                    std::cout << "Enter middleName: ";
+                    std::getline(std::cin, middleName);
                     std::cout << "Enter lastName: ";
                     std::getline(std::cin, lastName);
-                    Person p(firstName, lastName, id);
+                    std::cout << "Enter birthday: ";
+                    std::getline(std::cin, birthday);
+                    Person p(firstName, middleName, lastName, birthday, id);
                     if (!trs[ind].Search(p)) {
                         std::cout << "\nNo such person in this tree!\n";
                         continue;
@@ -338,12 +346,16 @@ int main() {
                     if (err) {
                         continue;
                     }
+                    std::string firstName, middleName, lastName, birthday;
                     std::cout << "Enter firstName: ";
-                    std::string firstName, lastName;
                     std::getline(std::cin, firstName);
+                    std::cout << "Enter middleName: ";
+                    std::getline(std::cin, middleName);
                     std::cout << "Enter lastName: ";
                     std::getline(std::cin, lastName);
-                    Person p(firstName, lastName, id);
+                    std::cout << "Enter birthday: ";
+                    std::getline(std::cin, birthday);
+                    Person p(firstName, middleName, lastName, birthday, id);
                     try {
                         BinaryTree<Person> t = trs[ind].GetSubTree(p);
                         trs.push_back(t);
@@ -378,7 +390,8 @@ int main() {
                         continue;
                     }
                     BinaryTree<Person> mp = trs[ind].Map([](const Person& p) {
-                        return Person(p.GetFirstName(), p.GetLastName(), p.GetID() - 1);
+                        return Person(p.GetFirstName(), p.GetMiddleName(), p.GetLastName(), p.GetBirthday(),
+                                      p.GetID() - 1);
                     });
                     trs.push_back(mp);
                     std::cout << "\nHere it is: " << mp.ToString() << "\n";
