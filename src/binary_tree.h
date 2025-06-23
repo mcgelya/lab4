@@ -366,5 +366,6 @@ private:
         Node<T>* newV = new Node<T>(v->value);
         newV->l = Clone(v->l);
         newV->r = Clone(v->r);
+        return newV;
     }
 };
