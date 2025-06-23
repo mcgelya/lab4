@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "binary_tree.h"
+#include "comp.h"
 #include "person.h"
 
 int parseInteger(std::string& s, bool& err, int l = INT_MIN, int r = INT_MAX) {
@@ -49,6 +50,7 @@ int main() {
     std::cout << "Choose mode:\n"
                  "1. Integers\n"
                  "2. Persons\n"
+                 "3. Complex\n"
               << std::endl;
     while (true) {
         std::string mode;
@@ -393,6 +395,179 @@ int main() {
                     trs.push_back(whr);
                     std::cout << "\nHere it is: " << whr.ToString() << "\n";
                 } else if (c == "8") {
+                    return 0;
+                } else {
+                    std::cout << "\nIncorrect option!\n";
+                }
+            }
+        } else if (mode == "3") {
+            std::vector<BinaryTree<Complex>> trs(1);
+            while (true) {
+                std::cout << "\nCurrently available " << trs.size() << " trees\n";
+                for (int i = 0; i < trs.size(); ++i) {
+                    std::cout << i + 1 << ". ";
+                    std::cout << trs[i].ToString() << std::endl;
+                }
+                std::cout << std::endl;
+
+                std::cout << "\nChoose operation:\n"
+                             "1. Insert element\n"
+                             "2. Erase element\n"
+                             "3. Save to string in given order\n"
+                             "4. Extract subtree\n"
+                             "5. Find subtree\n"
+                             "6. Map (conjugate)\n"
+                             "7. Where (filter to leave only real numbers)\n"
+                             "8. Reduce (find sum)\n"
+                             "9. Quit\n"
+                          << std::endl;
+                std::string c;
+                std::getline(std::cin, c);
+                if (c == "1") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter real part: ";
+                    int re = getInteger(err);
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter im part: ";
+                    int im = getInteger(err);
+                    if (err) {
+                        continue;
+                    }
+                    trs[ind].Insert(Complex(re, im));
+                } else if (c == "2") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter real part: ";
+                    int re = getInteger(err);
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter im part: ";
+                    int im = getInteger(err);
+                    if (err) {
+                        continue;
+                    }
+                    Complex x(re, im);
+                    if (!trs[ind].Search(x)) {
+                        std::cout << "\nNo such number in this tree!\n";
+                        continue;
+                    }
+                    trs[ind].Erase(x);
+                } else if (c == "3") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter format: ";
+                    std::string format;
+                    std::getline(std::cin, format);
+                    try {
+                        std::cout << "\n" << ind + 1 << ". " << trs[ind].ToString(format) << std::endl;
+                    } catch (std::invalid_argument& e) {
+                        std::cout << "\nInvalid format!\n";
+                        continue;
+                    }
+                } else if (c == "4") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter real part: ";
+                    int re = getInteger(err);
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter im part: ";
+                    int im = getInteger(err);
+                    if (err) {
+                        continue;
+                    }
+                    Complex x(re, im);
+                    try {
+                        BinaryTree<Complex> t = trs[ind].GetSubTree(x);
+                        trs.push_back(t);
+                    } catch (std::invalid_argument e) {
+                        std::cout << "No such value in tree!\n";
+                    }
+                } else if (c == "5") {
+                    std::cout << "Enter index of tree that you want to find: ";
+                    bool err = 0;
+                    int ind1 = getInteger(err, 1, trs.size());
+                    --ind1;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter index of tree where you want to find: ";
+                    int ind2 = getInteger(err, 1, trs.size());
+                    --ind2;
+                    if (err) {
+                        continue;
+                    }
+                    if (trs[ind2].FindSubTree(trs[ind1])) {
+                        std::cout << "\nYes, it is included as subtree\n";
+                    } else {
+                        std::cout << "\nNo, it is not included\n";
+                    }
+                } else if (c == "6") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    BinaryTree<Complex> mp = trs[ind].Map([](Complex x) {
+                        return x.Conj();
+                    });
+                    trs.push_back(mp);
+                    std::cout << "\nHere it is: " << mp.ToString() << "\n";
+                } else if (c == "7") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    BinaryTree<Complex> whr = trs[ind].Where([](Complex x) {
+                        return x.GetIm() == 0;
+                    });
+                    trs.push_back(whr);
+                    std::cout << "\nHere it is: " << whr.ToString() << "\n";
+                } else if (c == "8") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    Complex res = trs[ind].Reduce(
+                        [](Complex x, Complex acc) {
+                            return Complex(x.GetRe() + acc.GetRe(), x.GetIm() + acc.GetIm());
+                        },
+                        Complex(0, 0));
+                    std::cout << "\nHere it is: " << res << "\n";
+                } else if (c == "9") {
                     return 0;
                 } else {
                     std::cout << "\nIncorrect option!\n";
