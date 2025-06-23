@@ -110,7 +110,7 @@ public:
         return res;
     }
 
-    BinaryTree<T> GetSubTree(int x) {
+    BinaryTree<T> GetSubTree(T x) {
         if (!Search(x)) {
             throw std::invalid_argument("No such key");
         }
