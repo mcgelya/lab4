@@ -51,6 +51,7 @@ int main() {
                  "1. Integers\n"
                  "2. Persons\n"
                  "3. Complex\n"
+                 "4. Strings\n"
               << std::endl;
     while (true) {
         std::string mode;
@@ -568,6 +569,187 @@ int main() {
                         Complex(0, 0));
                     std::cout << "\nHere it is: " << res << "\n";
                 } else if (c == "9") {
+                    return 0;
+                } else {
+                    std::cout << "\nIncorrect option!\n";
+                }
+            }
+        } else if (mode == "4") {
+            std::vector<BinaryTree<std::string>> trs(1);
+            while (true) {
+                std::cout << "\nCurrently available " << trs.size() << " trees\n";
+                for (int i = 0; i < trs.size(); ++i) {
+                    std::cout << i + 1 << ". ";
+                    std::cout << trs[i].ToString() << std::endl;
+                }
+                std::cout << std::endl;
+
+                std::cout << "\nChoose operation:\n"
+                             "1. Insert element\n"
+                             "2. Erase element\n"
+                             "3. Save to string in given order\n"
+                             "4. Add tree from vector val-par\n"
+                             "5. Extract subtree\n"
+                             "6. Find subtree\n"
+                             "7. Map (to upper)\n"
+                             "8. Where (leave only upper strings)\n"
+                             "9. Reduce (concatenate all strings first letters)\n"
+                             "10. Quit\n"
+                          << std::endl;
+                std::string c;
+                std::getline(std::cin, c);
+                if (c == "1") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter string: ";
+                    std::string x;
+                    std::getline(std::cin, x);
+                    trs[ind].Insert(x);
+                } else if (c == "2") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter string: ";
+                    std::string x;
+                    std::getline(std::cin, x);
+                    if (!trs[ind].Search(x)) {
+                        std::cout << "\nNo such string in this tree!\n";
+                        continue;
+                    }
+                    trs[ind].Erase(x);
+                } else if (c == "3") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter format: ";
+                    std::string format;
+                    std::getline(std::cin, format);
+                    try {
+                        std::cout << "\n" << ind + 1 << ". " << trs[ind].ToString(format) << std::endl;
+                    } catch (std::invalid_argument& e) {
+                        std::cout << "\nInvalid format!\n";
+                        continue;
+                    }
+                } else if (c == "4") {
+                    std::cout << "Enter vector in format + val par, when you are done type '!'\n";
+                    std::string s;
+                    std::vector<std::pair<std::string, std::string>> cur;
+                    while (std::getline(std::cin, s)) {
+                        std::istringstream ss(s);
+                        char t;
+                        ss >> t;
+                        if (t == '!') {
+                            break;
+                        }
+                        std::string a, b;
+                        ss >> a >> b;
+                        cur.push_back({a, b});
+                    }
+                    try {
+                        BinaryTree<std::string> tr = BinaryTree<std::string>::FromPairs(cur);
+                        trs.push_back(tr);
+                    } catch (std::invalid_argument e) {
+                        std::cout << "\nInvalid tree!\n";
+                    }
+                } else if (c == "5") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter node (value): ";
+                    std::string x;
+                    std::getline(std::cin, x);
+                    try {
+                        BinaryTree<std::string> t = trs[ind].GetSubTree(x);
+                        trs.push_back(t);
+                    } catch (std::invalid_argument e) {
+                        std::cout << "No such value in tree!\n";
+                    }
+                } else if (c == "6") {
+                    std::cout << "Enter index of tree that you want to find: ";
+                    bool err = 0;
+                    int ind1 = getInteger(err, 1, trs.size());
+                    --ind1;
+                    if (err) {
+                        continue;
+                    }
+                    std::cout << "Enter index of tree where you want to find: ";
+                    int ind2 = getInteger(err, 1, trs.size());
+                    --ind2;
+                    if (err) {
+                        continue;
+                    }
+                    if (trs[ind2].FindSubTree(trs[ind1])) {
+                        std::cout << "\nYes, it is included as subtree\n";
+                    } else {
+                        std::cout << "\nNo, it is not included\n";
+                    }
+                } else if (c == "7") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    BinaryTree<std::string> mp = trs[ind].Map([](const std::string& s) {
+                        std::string res;
+                        for (char c : s) {
+                            res.push_back(std::toupper(c));
+                        }
+                        return res;
+                    });
+                    trs.push_back(mp);
+                    std::cout << "\nHere it is: " << mp.ToString() << "\n";
+                } else if (c == "8") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    BinaryTree<std::string> whr = trs[ind].Where([](const std::string& x) {
+                        for (char c : x) {
+                            if (!std::isupper(c)) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    });
+                    trs.push_back(whr);
+                    std::cout << "\nHere it is: " << whr.ToString() << "\n";
+                } else if (c == "9") {
+                    std::cout << "Enter index of tree: ";
+                    bool err = 0;
+                    int ind = getInteger(err, 1, trs.size());
+                    --ind;
+                    if (err) {
+                        continue;
+                    }
+                    std::string res = trs[ind].Reduce(
+                        [](std::string x, std::string acc) {
+                            return acc + x[0];
+                        },
+                        "");
+                    std::cout << "\nHere it is: " << res << "\n";
+                } else if (c == "10") {
                     return 0;
                 } else {
                     std::cout << "\nIncorrect option!\n";

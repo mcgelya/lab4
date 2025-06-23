@@ -197,7 +197,7 @@ public:
         };
         for (const auto& [v, _] : g) {
             if (!used[v]) {
-                dfs(dfs, v, -1);
+                dfs(dfs, v, v);
             }
         }
         std::map<T, int> cnt;
