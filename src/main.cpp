@@ -67,6 +67,7 @@ int main() {
                 std::cout << std::endl;
 
                 std::cout << "\nChoose operation:\n"
+                             "0. Add empty tree\n"
                              "1. Insert element\n"
                              "2. Erase element\n"
                              "3. Save to string in given order\n"
@@ -80,7 +81,9 @@ int main() {
                           << std::endl;
                 std::string c;
                 std::getline(std::cin, c);
-                if (c == "1") {
+                if (c == "0") {
+                    trs.push_back(BinaryTree<int>());
+                } else if (c == "1") {
                     std::cout << "Enter index of tree: ";
                     bool err = 0;
                     int ind = getInteger(err, 1, trs.size());
@@ -254,6 +257,7 @@ int main() {
                 std::cout << std::endl;
 
                 std::cout << "\nChoose operation:\n"
+                             "0. Add empty tree\n"
                              "1. Insert element\n"
                              "2. Erase element\n"
                              "3. Save to string in given order\n"
@@ -265,7 +269,9 @@ int main() {
                           << std::endl;
                 std::string c;
                 std::getline(std::cin, c);
-                if (c == "1") {
+                if (c == "0") {
+                    trs.push_back(BinaryTree<Person>());
+                } else if (c == "1") {
                     std::cout << "Enter index of tree: ";
                     bool err = 0;
                     int ind = getInteger(err, 1, trs.size());
@@ -464,6 +470,7 @@ int main() {
                 std::cout << std::endl;
 
                 std::cout << "\nChoose operation:\n"
+                             "0. Add empty tree\n"
                              "1. Insert element\n"
                              "2. Erase element\n"
                              "3. Save to string in given order\n"
@@ -476,7 +483,9 @@ int main() {
                           << std::endl;
                 std::string c;
                 std::getline(std::cin, c);
-                if (c == "1") {
+                if (c == "0") {
+                    trs.push_back(BinaryTree<Complex>());
+                } else if (c == "1") {
                     std::cout << "Enter index of tree: ";
                     bool err = 0;
                     int ind = getInteger(err, 1, trs.size());
@@ -637,6 +646,7 @@ int main() {
                 std::cout << std::endl;
 
                 std::cout << "\nChoose operation:\n"
+                             "0. Add empty tree\n"
                              "1. Insert element\n"
                              "2. Erase element\n"
                              "3. Save to string in given order\n"
@@ -650,7 +660,9 @@ int main() {
                           << std::endl;
                 std::string c;
                 std::getline(std::cin, c);
-                if (c == "1") {
+                if (c == "0") {
+                    trs.push_back(BinaryTree<std::string>());
+                } else if (c == "1") {
                     std::cout << "Enter index of tree: ";
                     bool err = 0;
                     int ind = getInteger(err, 1, trs.size());

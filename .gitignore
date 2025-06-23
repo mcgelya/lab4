@@ -1,4 +1,5 @@
 out/
+.venv/
 build/
 build-release/
 .vscode/
