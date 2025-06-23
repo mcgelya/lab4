@@ -1,8 +1,8 @@
 #include "person.h"
 
-Person::Person(const std::string& firstName, const std::string& middleName, const std::string& lastName,
-               const std::string& birthday, int id)
-    : firstName(firstName), middleName(middleName), lastName(lastName), birthday(birthday), id(id) {
+Person::Person(const std::string& firstName, const std::string& middleName, const std::string& lastName, int day,
+               int month, int year, int id)
+    : firstName(firstName), middleName(middleName), lastName(lastName), day(day), month(month), year(year), id(id) {
 }
 
 bool Person::operator<(const Person& other) const {
@@ -39,11 +39,20 @@ std::string Person::GetLastName() const {
     return lastName;
 }
 
-std::string Person::GetBirthday() const {
-    return birthday;
+int Person::GetBirthdayDay() const {
+    return day;
+}
+
+int Person::GetBirthdayMonth() const {
+    return month;
+}
+
+int Person::GetBirthdayYear() const {
+    return year;
 }
 
 std::ostream& operator<<(std::ostream& os, const Person& p) {
-    os << p.GetID() << ": " << p.GetLastName() << " " << p.GetFirstName() << " " << p.GetMiddleName();
+    os << p.GetID() << ": " << p.GetLastName() << " " << p.GetFirstName() << " " << p.GetMiddleName() << " "
+       << p.GetBirthdayDay() << "." << p.GetBirthdayMonth() << "." << p.GetBirthdayYear();
     return os;
 }
