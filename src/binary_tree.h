@@ -3,6 +3,7 @@
 #include <cctype>
 #include <map>
 #include <optional>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -16,6 +17,13 @@ struct Node {
     Node(T x) : value(x) {
     }
 };
+
+template <class T>
+std::string GetString(const T& x) {
+    std::ostringstream os;
+    os << x;
+    return os.str();
+}
 
 template <class T>
 class BinaryTree {
@@ -337,7 +345,7 @@ private:
         for (int i = 1; i <= 7; i += 3) {
             if (format[i] == 'N') {
                 res += format[i - 1];
-                res += std::to_string(v->value);
+                res += GetString(v->value);
                 res += format[i + 1];
             } else if (format[i] == 'L') {
                 if (v->l != nullptr) {
